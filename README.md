@@ -1,5 +1,6 @@
 ![Java CI with Maven](https://github.com/Sarahcvd/http-client-demo/workflows/Java%20CI%20with%20Maven/badge.svg)
 
+## Beskrivelse av oppgaven
 Dette prosjektet består av en HTTP-server og klient som kobles til en postgresql database. Vi har lagd tester for å se om planlagt funksjonalitet kjøres korrekt (tester mot: server, klient, querystring og database). Hovedklassen i prosjektet er server-klassen, denne kjøres for å starte servern (Forbindelse åpnes på port 8080 - via localhost). Klient-klassen brukes for å "snakke" med servern, data kan lastes opp og ned til serveren (html/txt objekter og css funksjonalitet). Det går ann å kommunisere med server i nettleseren. Workerdaoklassen lagrer bruker-input fra nettleser till databasen.
 
 * Vi har lagd threads i en uendelig "while-loop" for å holde serveren "åpen" sånn at den alltid er tilgjengelig for nye forbindelser. Kode for å stenge forbindensen er også lagd inn, "connection-close" for at nettsiden ikke står stille når brukeren prøver å kalle på serveren.
@@ -11,7 +12,7 @@ Dette prosjektet består av en HTTP-server og klient som kobles til en postgresq
 
 * Når brukeren har opprettet forbindelse mot serveren så har denne mulighet til å lagre informasjon til arbeidere som outputtes i en HTML fil og lagres i en database.
 
-* Erfaringer med arbeid og løsning:
+## Erfaringer med arbeid og løsning
 
 I denne oppgaven har vi vært svært gode til å jobbe sammen. Vi har vært fysisk tilstede hver gang vi har jobbet og dette har gjort at begge har fått en god forståelse av alt vi har gjort, samt at debuggingen har vært mer effektiv da begge vet hva som har blitt kodet. 
 
@@ -21,11 +22,15 @@ Vi mener dette har vært en utfordende oppgave å jobbe med, men vi har vært fl
 
 
 
-* Link til tilbakemeldinger til annet team: https://github.com/kristiania/pgr203eksamen-thensrud/issues
 
-
-* Server structure: 
+## Server structure
 ![Server Structure](docs/server_structure.png)
+
+## Evaluering gitt til annen gruppe
+https://github.com/kristiania/pgr203eksamen-thensrud/issues
+
+## Evaluering fra en annen gruppe
+https://github.com/kristiania/pgr203eksamen-Sarahcvd/issues
 
 
 Prosjektet er bygget av Sarah Christine van Dijk og Wali Gustav Björk
