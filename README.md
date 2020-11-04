@@ -32,5 +32,5 @@ https://github.com/kristiania/pgr203eksamen-thensrud/issues
 ## Evaluering fra en annen gruppe
 https://github.com/kristiania/pgr203eksamen-Sarahcvd/issues
 
-
+##
 Prosjektet er bygget av Sarah Christine van Dijk og Wali Gustav Björk
