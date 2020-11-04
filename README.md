@@ -13,7 +13,7 @@ Link til github repo: https://github.com/kristiania/pgr203eksamen-Sarahcvd
 * Vi har laget threads i en uendelig "while-loop" for å holde serveren "åpen" sånn at den alltid er tilgjengelig for nye forbindelser. 
 * Kode for å stenge forbindensen er også lagd inn, "connection-close" for at nettsiden ikke står stille når brukeren prøver å kalle på serveren.
 
-# Å kommunisere med serveren: 
+# Beskrivelse av hvordan man skal kjøre programmet: 
 ### Bygg og test executable jar-fil
 * Kjør `mvn clean` for å rense /target, kjør deretter `mvn` package for å opprette .jar filen som du skal kjøre. 
 * Konfigurasjonsfilen din skal du døpe til `pgr203.properties`, den skal inneholde verdier for: 
@@ -22,8 +22,15 @@ Link til github repo: https://github.com/kristiania/pgr203eksamen-Sarahcvd
   * `dataSource.password = ` passordet til brukeren
   
 * Etter å ha kjørt `mvn package` kan du kjøre serveren gjennom å skrive: `java -jar target/http-client-demo-1.0-SNAPSHOT.jar`
-
 * Når brukeren har opprettet forbindelse mot serveren så har denne mulighet til å lagre informasjon til arbeidere som outputtes i en HTML fil og lagres i en database.
+
+## Funksjonalitet
+* Programmet kjøres i nettleseren ved å gå inn på http://localhost:8080
+* Når du trykker på `New x` blir du sendt videre så du kan legge til nye elementer i databasen ved å fylle ut skjemaer
+* Når du trykker på `List x` vil du få opp en lite av elementene som du har lagt inn 
+* På `Edit worker` vil du kunne tildele en ny task til en worker 
+* Alle sider har en `Return to main menu` link som tar deg tilbake til forsiden 
+
 
 # Designbeskrivelse
 ### Server structure
@@ -50,5 +57,5 @@ https://github.com/kristiania/pgr203eksamen-thensrud/issues
 ## Evaluering fra en annen gruppe
 https://github.com/kristiania/pgr203eksamen-Sarahcvd/issues
 
-##
+#
 Prosjektet er bygget ved hjelp av par-programmering av: Sarah Christine van Dijk(Sarahcvd) og Wali Gustav Björk(WaliGustav)
