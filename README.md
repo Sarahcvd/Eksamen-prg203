@@ -5,19 +5,13 @@
 Link til github repo: https://github.com/kristiania/pgr203eksamen-Sarahcvd
 
 ## Beskrivelse av oppgaven
-Dette prosjektet består av en HTTP-server og klient som kobles til en postgresql database. 
-
-Vi har laget tester for å se om planlagt funksjonalitet kjøres korrekt (tester mot: server, klient, querystring og database). 
-
-Hovedklassen i prosjektet er server-klassen, denne kjøres for å starte servern (forbindelse åpnes på port 8080 - via localhost). 
-
-Klient-klassen brukes for å "snakke" med serveren, data kan lastes opp og ned til serveren (html/txt objekter og css funksjonalitet). 
-
-Det er mulig å kommunisere med server i nettleseren. Workerdaoklassen lagrer bruker-input fra nettleser til databasen.
-
-Vi har laget threads i en uendelig "while-loop" for å holde serveren "åpen" sånn at den alltid er tilgjengelig for nye forbindelser. 
-
-Kode for å stenge forbindensen er også lagd inn, "connection-close" for at nettsiden ikke står stille når brukeren prøver å kalle på serveren.
+* Dette prosjektet består av en HTTP-server og klient som kobles til en postgresql database. 
+* Vi har laget tester for å se om planlagt funksjonalitet kjøres korrekt (tester mot: server, klient, querystring og database). 
+* Hovedklassen i prosjektet er server-klassen, denne kjøres for å starte serveren (forbindelse åpnes på port 8080 - via localhost). 
+* Klient-klassen brukes for å "snakke" med serveren, data kan lastes opp og ned til serveren (html/txt objekter og css funksjonalitet). 
+* Det er mulig å kommunisere med server i nettleseren. Workerdaoklassen lagrer bruker-input fra nettleser til databasen.
+* Vi har laget threads i en uendelig "while-loop" for å holde serveren "åpen" sånn at den alltid er tilgjengelig for nye forbindelser. 
+* Kode for å stenge forbindensen er også lagd inn, "connection-close" for at nettsiden ikke står stille når brukeren prøver å kalle på serveren.
 
 # Å kommunisere med serveren: 
 ### Bygg og test executable jar-fil
