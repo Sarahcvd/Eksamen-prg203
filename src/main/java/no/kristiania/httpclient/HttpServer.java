@@ -27,10 +27,11 @@ public class HttpServer {
 
     private static WorkerDao workerDao;
     private ServerSocket serverSocket;
+    private final TaskDao taskDao;
 
     public HttpServer(int port, DataSource dataSource) throws IOException {
         workerDao = new WorkerDao(dataSource);
-        TaskDao taskDao = new TaskDao(dataSource);
+        taskDao = new TaskDao(dataSource);
         controllers = Map.of(
                 "/api/newTask", new WorkerTaskPostController(taskDao),
                 "/api/tasks", new WorkerTaskGetController(taskDao),
@@ -111,8 +112,9 @@ public class HttpServer {
         worker.setEmailAddress(decodedOutput);
 
         workerDao.insert(worker);
-        String body = "Okay";
-        String response = "HTTP/1.1 200 OK\r\n" +
+        String body = "Hang on, redirecting....";
+        String response = "HTTP/1.1 302 REDIRECT\r\n" +
+                "Location: http://localhost:8080/newWorker.html\r\n" +
                 "Content-Length: " + body.length() + "\r\n" +
                 "Connection: close\r\n" +
                 "\r\n" +
