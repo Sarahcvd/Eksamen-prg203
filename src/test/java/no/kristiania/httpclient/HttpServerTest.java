@@ -130,6 +130,6 @@ class HttpServerTest {
 
         WorkerTaskDao workerTaskDao = new WorkerTaskDao(dataSource);
         cleaning.setId(wali.getId());
-        workerTaskDao.update(cleaning);
+        //workerTaskDao.update(cleaning);
     }
 }

@@ -18,7 +18,7 @@ public class WorkerTaskDao extends AbstractDao <WorkerTask>{
         return workerTask;
     }
 
-    public void update(Task task) throws SQLException {
+    /* public void update(Task task) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "UPDATE worker_task SET worker_id = ? WHERE task_id = ?" //Denne er åpenbart feil
@@ -28,25 +28,17 @@ public class WorkerTaskDao extends AbstractDao <WorkerTask>{
                 statement.executeUpdate();
             }
         }
-    }
+    } */
 
     public void insert(Task task, Worker worker) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO worker_task (task_id, worker_id) VALUES (?, ?)",
-                    Statement.RETURN_GENERATED_KEYS
+                    "INSERT INTO worker_task (task_id, worker_id) VALUES (?, ?)"
 
             )) {
                 statement.setLong(1, task.getId());
                 statement.setLong(2, worker.getId());
                 statement.executeUpdate();
-
-                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                    generatedKeys.next();
-                    WorkerTask workerTask = new WorkerTask();
-                    workerTask.setTaskId((long) generatedKeys.getInt("task_id"));
-                    workerTask.setWorkerId((long) generatedKeys.getInt("worker_id"));
-                }
             }
         }
     }

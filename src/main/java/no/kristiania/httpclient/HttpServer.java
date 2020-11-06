@@ -3,6 +3,7 @@ package no.kristiania.httpclient;
 import no.kristiania.database.Worker;
 import no.kristiania.database.WorkerDao;
 import no.kristiania.database.TaskDao;
+import no.kristiania.database.WorkerTaskDao;
 import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.slf4j.Logger;
@@ -33,12 +34,13 @@ public class HttpServer {
     public HttpServer(int port, DataSource dataSource) throws IOException {
         workerDao = new WorkerDao(dataSource);
         taskDao = new TaskDao(dataSource);
+        WorkerTaskDao workerTaskDao = new WorkerTaskDao(dataSource);
         controllers = Map.of(
                 "/api/newTask", new WorkerTaskPostController(taskDao),
                 "/api/tasks", new WorkerTaskGetController(taskDao),
                 "/api/taskOptions", new taskOptionsController(taskDao),
                 "/api/workerOptions", new WorkerOptionsController(workerDao),
-                "/api/updateWorker", new UpdateWorkerController(workerDao, taskDao)
+                "/api/updateWorker", new UpdateWorkerController(workerDao, taskDao, workerTaskDao)
         );
         // Open an entry point to our program for network clients
         serverSocket = new ServerSocket(port);

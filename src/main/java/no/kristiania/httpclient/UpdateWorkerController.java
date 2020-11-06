@@ -9,12 +9,13 @@ import java.sql.SQLException;
 
 public class UpdateWorkerController implements HttpController{
     private final TaskDao taskDao;
+    private WorkerTaskDao workerTaskDao;
     private WorkerDao workerDao;
-    private DataSource dataSource;
 
-    public UpdateWorkerController(WorkerDao workerDao, TaskDao taskDao) {
+    public UpdateWorkerController(WorkerDao workerDao, TaskDao taskDao, WorkerTaskDao workerTaskDao) {
         this.workerDao = workerDao;
         this.taskDao = taskDao;
+        this.workerTaskDao = workerTaskDao;
     }
 
     @Override
@@ -31,12 +32,7 @@ public class UpdateWorkerController implements HttpController{
         Long taskId = Long.valueOf(requestedParameter.getParameter("taskId"));
         Worker worker = workerDao.retrieve(workerId);
         Task task = taskDao.retrieve(taskId);
-        WorkerTask workerTask = new WorkerTask();
 
-        workerTask.setTaskId(taskId);
-        workerTask.setWorkerId(workerId);
-
-        WorkerTaskDao workerTaskDao = new WorkerTaskDao(dataSource);
         workerTaskDao.insert(task, worker);
 
         HttpMessage redirect = new HttpMessage();
