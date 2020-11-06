@@ -22,6 +22,7 @@ import java.util.Properties;
 public class HttpServer {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpServer.class);
+    private static String headerClose = "Connection: close";
 
     private Map<String, HttpController> controllers;
 
@@ -116,7 +117,7 @@ public class HttpServer {
         String response = "HTTP/1.1 302 REDIRECT\r\n" +
                 "Location: http://localhost:8080/newWorker.html\r\n" +
                 "Content-Length: " + body.length() + "\r\n" +
-                "Connection: close\r\n" +
+                headerClose + "\r\n" +
                 "\r\n" +
                 body;
         // Write the response back to the client
@@ -129,7 +130,7 @@ public class HttpServer {
                 String body = requestPath + " does not exist";
                 String response = "HTTP/1.1 404 Not Found\r\n" +
                         "Content-Length: " + body.length() + "\r\n" +
-                        "Connection: close\r\n" +
+                        headerClose + "\r\n" +
                         "\r\n" +
                         body;
                 clientSocket.getOutputStream().write(response.getBytes());
