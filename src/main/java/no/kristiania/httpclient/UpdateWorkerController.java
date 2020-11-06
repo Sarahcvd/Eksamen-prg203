@@ -1,17 +1,20 @@
 package no.kristiania.httpclient;
 
-import no.kristiania.database.Worker;
-import no.kristiania.database.WorkerDao;
+import no.kristiania.database.*;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.net.Socket;
 import java.sql.SQLException;
 
 public class UpdateWorkerController implements HttpController{
+    private final TaskDao taskDao;
     private WorkerDao workerDao;
+    private DataSource dataSource;
 
-    public UpdateWorkerController(WorkerDao workerDao) {
+    public UpdateWorkerController(WorkerDao workerDao, TaskDao taskDao) {
         this.workerDao = workerDao;
+        this.taskDao = taskDao;
     }
 
     @Override
@@ -24,12 +27,17 @@ public class UpdateWorkerController implements HttpController{
     public HttpMessage handle(HttpMessage request) throws SQLException {
         QueryString requestedParameter = new QueryString(request.getBody());
 
-        Integer workerId = Integer.valueOf(requestedParameter.getParameter("workerId"));
-        Integer taskId = Integer.valueOf(requestedParameter.getParameter("taskId"));
+        Long workerId = Long.valueOf(requestedParameter.getParameter("workerId"));
+        Long taskId = Long.valueOf(requestedParameter.getParameter("taskId"));
         Worker worker = workerDao.retrieve(workerId);
-        worker.setTaskId(taskId);
+        Task task = taskDao.retrieve(taskId);
+        WorkerTask workerTask = new WorkerTask();
 
-        workerDao.update(worker);
+        workerTask.setTaskId(taskId);
+        workerTask.setWorkerId(workerId);
+
+        WorkerTaskDao workerTaskDao = new WorkerTaskDao(dataSource);
+        workerTaskDao.insert(task, worker);
 
         HttpMessage redirect = new HttpMessage();
         redirect.setStartLine("HTTP/1.1 302 Redirect");

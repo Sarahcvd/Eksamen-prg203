@@ -39,13 +39,13 @@ public class WorkerDao extends AbstractDao<Worker> {
 
                 try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                     generatedKeys.next();
-                    worker.setId(generatedKeys.getInt("id"));
+                    worker.setId(generatedKeys.getLong("id"));
                 }
             }
         }
     }
 
-    public void update(Worker worker) throws SQLException {
+    /*public void update(Worker worker) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
                     "UPDATE worker SET task_id = ? WHERE id = ?"
@@ -56,17 +56,16 @@ public class WorkerDao extends AbstractDao<Worker> {
                 statement.executeUpdate();
             }
         }
-    }
+    }*/
 
-    public Worker retrieve(Integer id) throws SQLException {
+    public Worker retrieve(Long id) throws SQLException {
         return retrieve(id, "SELECT * FROM worker WHERE id = ?");
     }
 
     @Override
     protected Worker mapRow(ResultSet rs) throws SQLException {
         Worker worker = new Worker();
-        worker.setId(rs.getInt("id"));
-        worker.setTaskId((Integer) rs.getObject("task_id"));
+        worker.setId(rs.getLong("id"));
         worker.setFirstName(rs.getString("first_name"));
         worker.setLastName(rs.getString("last_name"));
         worker.setEmailAddress(rs.getString("email_address"));

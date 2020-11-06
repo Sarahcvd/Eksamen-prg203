@@ -14,13 +14,30 @@
         </div>
         <div id="tasks"></div>
 
+        <form>
+            <p>
+                Filter by worker: <select id="id" name="id"></select>
+                <button>Filter</button>
+            </p>
+            <p>
+                Filter by status: <select id="colorcode" name="colorcode"></select>
+                <button>Filter</button>
+            </p>
+        </form>
+
     </body>
     <script>
         function showAllTasks(){
-            fetch("/api/tasks").then(response => response.text()).then(html => {
+            fetch("/api/tasks" + location.search).then(response => response.text()).then(html => {
                 document.getElementById("tasks").innerHTML = html
             });
         }
+        fetch("/api/workerOptions").then(response => response.text()).then(html => {
+            document.getElementById("id").innerHTML = html
+        });
+        fetch("/api/taskOptions").then(response => response.text()).then(html => {
+            document.getElementById("colorcode").innerHTML = html
+        });
 
     </script>
 </html>

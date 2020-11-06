@@ -1,7 +1,6 @@
 package no.kristiania.httpclient;
 
-import no.kristiania.database.Worker;
-import no.kristiania.database.WorkerDao;
+import no.kristiania.database.*;
 import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.BeforeEach;
@@ -109,4 +108,28 @@ class HttpServerTest {
         assertThat(client.getResponseBody()).contains("<li>wali gustav wgbjork@gmail.com</li>");
     }
 
+    @Test
+    void shouldFilterTasksByWorker() throws SQLException {
+        TaskDao taskDao = new TaskDao(dataSource);
+        Task jogging = new Task();
+        jogging.setName("Jogging");
+        jogging.setColorCode("Yellow");
+        taskDao.insert(jogging);
+
+        Task cleaning = new Task();
+        cleaning.setName("Cleaning");
+        cleaning.setColorCode("Red");
+        taskDao.insert(cleaning);
+
+        WorkerDao workerDao = new WorkerDao(dataSource);
+        Worker wali = new Worker();
+        wali.setFirstName("wali");
+        wali.setLastName("gustav");
+        wali.setEmailAddress("wgbjork@gmail.com");
+        workerDao.insert(wali);
+
+        WorkerTaskDao workerTaskDao = new WorkerTaskDao(dataSource);
+        cleaning.setId(wali.getId());
+        workerTaskDao.update(cleaning);
+    }
 }

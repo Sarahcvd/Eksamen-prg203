@@ -1,22 +1,26 @@
 package no.kristiania.database;
 
 public class WorkerTask {
-    private String workerId;
-    private String taskId;
+    private Long workerId;
+    private Long taskId;
 
-    public String getWorkerId() {
+    public Long getWorkerId() {
+
         return workerId;
     }
 
-    public void setWorkerId(String workerId) {
+    public void setWorkerId(Long workerId) {
+
         this.workerId = workerId;
     }
 
-    public String getTaskId() {
+    public long getTaskId() {
+
         return taskId;
     }
 
-    public void setTaskId(String taskId) {
+    public void setTaskId(Long taskId) {
+
         this.taskId = taskId;
     }
 }

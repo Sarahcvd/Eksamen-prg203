@@ -62,7 +62,7 @@ public class WorkerDaoTest {
                 .contains("<option value=" + worker.getId() + ">" + worker.getFirstName() + "</option>");
     }
 
-    @Test
+    /*@Test
     void shouldUpdateExistingWorkerWithNewTask() throws IOException, SQLException {
         UpdateWorkerController controller = new UpdateWorkerController(workerDao);
 
@@ -81,7 +81,7 @@ public class WorkerDaoTest {
                 .isEqualTo("HTTP/1.1 302 Redirect");
         assertThat(response.getHeaders().get("Location"))
                 .isEqualTo("http://localhost:8080/editWorker.html");
-    }
+    }*/
 
     public static Worker exampleWorker() {
         Worker worker = new Worker();

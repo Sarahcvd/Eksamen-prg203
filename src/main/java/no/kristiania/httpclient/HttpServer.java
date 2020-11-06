@@ -38,7 +38,7 @@ public class HttpServer {
                 "/api/tasks", new WorkerTaskGetController(taskDao),
                 "/api/taskOptions", new taskOptionsController(taskDao),
                 "/api/workerOptions", new WorkerOptionsController(workerDao),
-                "/api/updateWorker", new UpdateWorkerController(workerDao)
+                "/api/updateWorker", new UpdateWorkerController(workerDao, taskDao)
         );
         // Open an entry point to our program for network clients
         serverSocket = new ServerSocket(port);
@@ -87,7 +87,7 @@ public class HttpServer {
             if (requestPath.equals("/echo")) {
                 handleEchoRequest(clientSocket, requestTarget, questionPos);
             } else if (requestPath.equals("/api/worker")){
-                handleGetWorkers(clientSocket);
+                handleGetWorkers(clientSocket, requestTarget, questionPos);
             } else {
                 HttpController controller = controllers.get(requestPath);
                 if(controller != null){
@@ -157,7 +157,7 @@ public class HttpServer {
         }
     }
 
-    public static void handleGetWorkers(Socket clientSocket) throws IOException, SQLException {
+    public static void handleGetWorkers(Socket clientSocket, String requestTarget, int questionPos) throws IOException, SQLException {
         String body = "<ul>";
         for (Worker worker : workerDao.list()) {
             body += "<li>" + worker.getFirstName() + " " + worker.getLastName() + " " + worker.getEmailAddress() + "</li>";

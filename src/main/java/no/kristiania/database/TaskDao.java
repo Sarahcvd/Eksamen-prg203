@@ -23,13 +23,15 @@ public class TaskDao extends AbstractDao<Task>{
 
                 try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                     generatedKeys.next();
-                    task.setId(generatedKeys.getInt("id"));
+                    task.setId(generatedKeys.getLong("id"));
                 }
             }
         }
     }
 
-    public Task retrieve(Integer id) throws SQLException {
+
+
+    public Task retrieve(Long id) throws SQLException {
         return retrieve(id, "SELECT * FROM task WHERE id = ?");
     }
 
@@ -50,7 +52,7 @@ public class TaskDao extends AbstractDao<Task>{
     @Override
     protected Task mapRow(ResultSet rs) throws SQLException {
         Task task = new Task();
-        task.setId(rs.getInt("id"));
+        task.setId(rs.getLong("id"));
         task.setName(rs.getString("name"));
         task.setColorCode(rs.getString("colorcode"));
         return task;
