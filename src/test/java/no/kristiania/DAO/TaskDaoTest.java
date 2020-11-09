@@ -1,8 +1,8 @@
-package no.kristiania.database;
+package no.kristiania.DAO;
 
-import no.kristiania.httpclient.HttpClient;
-import no.kristiania.httpclient.HttpServer;
-import no.kristiania.httpclient.taskOptionsController;
+import no.kristiania.HTTP.HttpClient;
+import no.kristiania.HTTP.HttpServer;
+import no.kristiania.HTTP.taskOptionsController;
 import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.BeforeEach;

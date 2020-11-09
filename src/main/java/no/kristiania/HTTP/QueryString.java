@@ -1,4 +1,4 @@
-package no.kristiania.httpclient;
+package no.kristiania.HTTP;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;

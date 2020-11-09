@@ -1,7 +1,7 @@
-package no.kristiania.httpclient;
+package no.kristiania.HTTP;
 
-import no.kristiania.database.Task;
-import no.kristiania.database.TaskDao;
+import no.kristiania.DAO.Task;
+import no.kristiania.DAO.TaskDao;
 
 import java.io.IOException;
 import java.net.Socket;

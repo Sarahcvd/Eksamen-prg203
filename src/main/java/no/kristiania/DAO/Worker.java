@@ -1,4 +1,4 @@
-package no.kristiania.database;
+package no.kristiania.DAO;
 
 public class Worker {
     private String firstName;

@@ -1,9 +1,9 @@
-package no.kristiania.httpclient;
+package no.kristiania.HTTP;
 
-import no.kristiania.database.Worker;
-import no.kristiania.database.WorkerDao;
-import no.kristiania.database.TaskDao;
-import no.kristiania.database.WorkerTaskDao;
+import no.kristiania.DAO.Worker;
+import no.kristiania.DAO.WorkerDao;
+import no.kristiania.DAO.TaskDao;
+import no.kristiania.DAO.WorkerTaskDao;
 import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.slf4j.Logger;
