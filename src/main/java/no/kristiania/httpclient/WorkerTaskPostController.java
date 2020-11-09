@@ -29,7 +29,7 @@ public class WorkerTaskPostController implements HttpController {
         task.setStatusColorCode(decodedTaskStatusColor);
         taskDao.insert(task);
 
-        String body = "Hang on, redirecting....";
+        String body = "Wait a second, redirecting....";
         String response = "HTTP/1.1 302 REDIRECT\r\n" +
                 "Location: http://localhost:8080/newTask.html\r\n" +
                 "Content-Length: " + body.length() + "\r\n" +

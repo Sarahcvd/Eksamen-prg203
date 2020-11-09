@@ -19,8 +19,7 @@ public class taskOptionsController implements HttpController{
         HttpMessage response = new HttpMessage(getBody());
         response.write(clientSocket);
 
-        HttpMessage redirect = new HttpMessage();
-        return redirect;
+        return new HttpMessage();
     }
 
     public String getBody() throws SQLException {

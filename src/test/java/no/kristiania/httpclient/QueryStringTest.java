@@ -28,7 +28,7 @@ public class QueryStringTest {
     @Test
     void shouldRetrieveParameterByName(){
         QueryString queryString = new QueryString("text=Hello");
-        assertEquals(null, queryString.getParameter("status"));
+        assertNull(queryString.getParameter("status"));
         assertEquals("Hello", queryString.getParameter("text"));
     }
 

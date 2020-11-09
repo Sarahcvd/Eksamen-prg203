@@ -107,25 +107,4 @@ class HttpServerTest {
         HttpClient client = new HttpClient("localhost", server.getPort(), "/api/worker");
         assertThat(client.getResponseBody()).contains("<li>gurra gurrson gurr@gurr.no</li>");
     }
-
-    @Test
-    void shouldFilterTasksByWorker() throws SQLException {
-        TaskDao taskDao = new TaskDao(dataSource);
-        Task greet = new Task();
-        greet.setName("Greeting");
-        greet.setStatusColorCode("Yellow");
-        taskDao.insert(greet);
-
-        Task whispering = new Task();
-        whispering.setName("Cleaning");
-        whispering.setStatusColorCode("Red");
-        taskDao.insert(whispering);
-
-        WorkerDao workerDao = new WorkerDao(dataSource);
-        Worker wali = new Worker();
-        wali.setFirstName("wali");
-        wali.setLastName("gustav");
-        wali.setEmailAddress("wgbjork@gmail.com");
-        workerDao.insert(wali);
-    }
 }

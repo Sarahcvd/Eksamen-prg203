@@ -11,12 +11,10 @@ import java.util.List;
 public class WorkerTaskGetController implements HttpController {
     private TaskDao taskDao;
     private WorkerDao workerDao;
-    private WorkerTaskDao workerTaskDao;
 
-    public WorkerTaskGetController(TaskDao taskDao, WorkerDao workerDao, WorkerTaskDao workerTaskDao) {
+    public WorkerTaskGetController(TaskDao taskDao, WorkerDao workerDao) {
         this.taskDao = taskDao;
         this.workerDao = workerDao;
-        this.workerTaskDao = workerTaskDao;
     }
 
     @Override
@@ -25,24 +23,24 @@ public class WorkerTaskGetController implements HttpController {
         StringBuilder stringBuilder = new StringBuilder();
 
         List<Task> tasks = taskDao.list();
-        for(int i=0; i < tasks.size(); i++){
-            String taskId = "" + tasks.get(i).getId();
+        for (Task task : tasks) {
+            String taskId = "" + task.getId();
             String sql = "select w.* from worker_task wt " +
                     "join worker w on wt.worker_id = w.id where wt.task_id = " + taskId;
-            String workerName= "";
+            String workerName = "";
 
-            String status = tasks.get(i).getStatusColorCode();
-            if(status == null){
+            String status = task.getStatusColorCode();
+            if (status == null) {
                 status = "No status";
             }
 
             List<Worker> workers = workerDao.list(sql);
             System.out.println("size: " + workers.size());
-            for (int j = 0; j < workers.size(); j++) {
-                workerName = workerName + workers.get(j).getFirstName() + ", ";
+            for (Worker worker : workers) {
+                workerName = workerName + worker.getFirstName() + ", ";
             }
             stringBuilder.append("<hr> <article>\n" +
-                    "<h1> Task: " + tasks.get(i).getName() + "</h1>\n" +
+                    "<h1> Task: " + task.getName() + "</h1>\n" +
                     "<p><strong> Status:</strong> " + status + "</p>\n" +
                     "<p><strong> Workers:</strong> " + workerName + "</p>\n" +
                     "\n" +

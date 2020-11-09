@@ -2,7 +2,6 @@ package no.kristiania.httpclient;
 
 import no.kristiania.database.*;
 
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.net.Socket;
 import java.sql.SQLException;

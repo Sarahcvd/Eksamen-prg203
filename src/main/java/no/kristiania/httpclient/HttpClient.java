@@ -2,7 +2,6 @@ package no.kristiania.httpclient;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.HashMap;
 import java.util.Map;
 
 public class HttpClient {

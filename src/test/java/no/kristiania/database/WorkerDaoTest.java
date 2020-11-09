@@ -1,14 +1,11 @@
 package no.kristiania.database;
 
-import no.kristiania.httpclient.HttpMessage;
-import no.kristiania.httpclient.UpdateWorkerController;
 import no.kristiania.httpclient.WorkerOptionsController;
 import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Random;
 

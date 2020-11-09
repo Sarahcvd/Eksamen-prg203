@@ -8,16 +8,6 @@
     <body>
 
         <h1>Task overview</h1>
-        <form>
-            <p>
-                Filter by worker: <select id="id" name="id"></select>
-                <button>Filter</button>
-            </p>
-            <p>
-                Filter by status: <select id="statusColorCode" name="statusColorCode"></select>
-                <button>Filter</button>
-            </p>
-        </form>
         <div>
             <button onClick="showAllTasks()">Show all tasks</button>
         </div>
@@ -26,8 +16,8 @@
         <a href="index.html">Return to menu</a>
     </body>
     <script>
-        function showAllTasks(){
-            fetch("/api/tasks" + location.search).then(response => response.text()).then(html => {
+        function showAllTasks() {
+            fetch("/api/tasks").then(response => response.text()).then(html => {
                 document.getElementById("tasks").innerHTML = html
             });
         }
