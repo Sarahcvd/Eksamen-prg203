@@ -21,7 +21,7 @@ Link til github repo: https://github.com/kristiania/pgr203eksamen-Sarahcvd
   * `dataSoure.username  = ` ditt brukernavn på databasen 
   * `dataSource.password = ` passordet til brukeren
   
-* Etter å ha kjørt `mvn package` kan du kjøre serveren gjennom å skrive: `java -jar target/http-client-demo-1.0-SNAPSHOT.jar`
+* Etter å ha kjørt `mvn package` kan du kjøre serveren gjennom å skrive: `java -Dfile.encoding=UTF-8 -jar target/http-client-demo-1.0-SNAPSHOT.jar`
 * Når brukeren har opprettet forbindelse mot serveren så har denne mulighet til å lagre informasjon til arbeidere som outputtes i en HTML fil og lagres i en database.
 
 ## Funksjonalitet
