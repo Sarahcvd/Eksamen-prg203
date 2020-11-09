@@ -58,7 +58,7 @@ public class TaskDaoTest {
                 "<h4> Workers: </h4>\n" +
                 "<div></div>\n" +
                 "\n" +
-                "    </article>");
+                "    </article> <hr>");
     }
 
     @Test
@@ -81,7 +81,7 @@ public class TaskDaoTest {
         taskDao.insert(task);
 
         assertThat(controller.getBody())
-                .contains("<option value=" + task.getId() +">" + task.getName() + task.getColorCode() +"</option>");
+                .contains("<option value=" + task.getId() +">" + task.getName() + "</option>");
     }
 
     public static Task exampleTask() {
