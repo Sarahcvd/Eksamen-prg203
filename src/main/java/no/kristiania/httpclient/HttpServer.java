@@ -108,12 +108,15 @@ public class HttpServer {
 
     public static void handlePostWorker(Socket clientSocket, HttpMessage request) throws SQLException, IOException {
         QueryString requestedParameter = new QueryString(request.getBody());
-        String decodedOutput = URLDecoder.decode(requestedParameter.getParameter("email_address"), StandardCharsets.UTF_8);
+        String decodedFirstName = URLDecoder.decode(requestedParameter.getParameter("first_name"), StandardCharsets.UTF_8);
+        String decodedLastName = URLDecoder.decode(requestedParameter.getParameter("last_name"), StandardCharsets.UTF_8);
+        String decodedEmailAddress = URLDecoder.decode(requestedParameter.getParameter("email_address"), StandardCharsets.UTF_8);
+
 
         Worker worker = new Worker();
-        worker.setFirstName(requestedParameter.getParameter("first_name"));
-        worker.setLastName(requestedParameter.getParameter("last_name"));
-        worker.setEmailAddress(decodedOutput);
+        worker.setFirstName(decodedFirstName);
+        worker.setLastName(decodedLastName);
+        worker.setEmailAddress(decodedEmailAddress);
 
         workerDao.insert(worker);
         String body = "Hang on, redirecting....";
