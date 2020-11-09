@@ -22,7 +22,7 @@ public class WorkerTaskGetController implements HttpController {
     @Override
     public HttpMessage handle(HttpMessage request, Socket clientSocket) throws IOException, SQLException {
         String body = "";
-        StringBuilder bod = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
 
         List<Task> tasks = taskDao.list();
         for(int i=0; i < tasks.size(); i++){
@@ -41,16 +41,14 @@ public class WorkerTaskGetController implements HttpController {
             for (int j = 0; j < workers.size(); j++) {
                 workerName = workerName + workers.get(j).getFirstName() + ", ";
             }
-            bod.append("<hr> <article>\n" +
-                    "<h1>" + tasks.get(i).getName() + "</h1>\n" +
-                    "<h4> Status: </h4>\n" +
-                    "<p>" + status + "</p>\n" +
-                    "<h4> Workers: </h4>\n" +
-                    "<div>" + workerName + "</div>\n" +
+            stringBuilder.append("<hr> <article>\n" +
+                    "<h1> Task: " + tasks.get(i).getName() + "</h1>\n" +
+                    "<p><strong> Status:</strong> " + status + "</p>\n" +
+                    "<p><strong> Workers:</strong> " + workerName + "</p>\n" +
                     "\n" +
                     "    </article>");
         }
-        body += bod;
+        body += stringBuilder;
         body += "<hr>";
 
         String response = "HTTP/1.1 200 OK\r\n" +

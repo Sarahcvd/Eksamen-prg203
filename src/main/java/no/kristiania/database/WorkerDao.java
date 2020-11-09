@@ -25,7 +25,6 @@ public class WorkerDao extends AbstractDao<Worker> {
         }
     }
 
-
     public void insert(Worker worker) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
@@ -45,19 +44,6 @@ public class WorkerDao extends AbstractDao<Worker> {
             }
         }
     }
-
-    /*public void update(Worker worker) throws SQLException {
-        try (Connection connection = dataSource.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE worker SET task_id = ? WHERE id = ?"
-
-            )) {
-                statement.setLong(1, worker.getTaskId());
-                statement.setLong(2, worker.getId());
-                statement.executeUpdate();
-            }
-        }
-    }*/
 
     public Worker retrieve(int id) throws SQLException {
         return retrieve(id, "SELECT * FROM worker WHERE id = ?");

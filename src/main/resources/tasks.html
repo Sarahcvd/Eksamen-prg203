@@ -8,12 +8,6 @@
     <body>
 
         <h1>Task overview</h1>
-        <a href="index.html">Return to menu</a>
-        <div>
-            <button onClick="showAllTasks()">Show all tasks</button>
-        </div>
-        <div id="tasks"></div>
-
         <form>
             <p>
                 Filter by worker: <select id="id" name="id"></select>
@@ -24,7 +18,12 @@
                 <button>Filter</button>
             </p>
         </form>
+        <div>
+            <button onClick="showAllTasks()">Show all tasks</button>
+        </div>
+        <div id="tasks"></div>
 
+        <a href="index.html">Return to menu</a>
     </body>
     <script>
         function showAllTasks(){

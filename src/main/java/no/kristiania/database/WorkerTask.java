@@ -5,7 +5,6 @@ public class WorkerTask {
     private int taskId;
 
     public int getWorkerId() {
-
         return workerId;
     }
 
