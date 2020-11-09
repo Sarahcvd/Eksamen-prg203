@@ -52,11 +52,9 @@ public class TaskDaoTest {
 
         HttpClient getClient = new HttpClient("localhost", server.getPort(), "/api/tasks");
         assertThat(getClient.getResponseBody()).contains("<hr> <article>\n" +
-                "<h1>Deskcleaning</h1>\n" +
-                "<h4> Status: </h4>\n" +
-                "<p>black</p>\n" +
-                "<h4> Workers: </h4>\n" +
-                "<div></div>\n" +
+                "<h1> Task: Deskcleaning</h1>\n" +
+                "<p><strong> Status:</strong> black</p>\n" +
+                "<p><strong> Workers:</strong> </p>\n" +
                 "\n" +
                 "    </article><hr>");
     }
