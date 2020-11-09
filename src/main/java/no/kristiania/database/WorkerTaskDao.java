@@ -14,8 +14,8 @@ public class WorkerTaskDao extends AbstractDao <WorkerTask>{
     @Override
     protected WorkerTask mapRow(ResultSet rs) throws SQLException {
         WorkerTask workerTask = new WorkerTask();
-        workerTask.setTaskId(rs.getLong("task_id"));
-        workerTask.setWorkerId(rs.getLong("worker_id"));
+        workerTask.setTaskId(rs.getInt("task_id"));
+        workerTask.setWorkerId(rs.getInt("worker_id"));
 
         return workerTask;
     }
@@ -40,8 +40,8 @@ public class WorkerTaskDao extends AbstractDao <WorkerTask>{
                     "INSERT INTO worker_task (task_id, worker_id) VALUES (?, ?)"
 
             )) {
-                statement.setLong(1, task.getId());
-                statement.setLong(2, worker.getId());
+                statement.setInt(1, task.getId());
+                statement.setInt(2, worker.getId());
                 statement.executeUpdate();
             }
         }

@@ -46,19 +46,19 @@ public class TaskDaoTest {
     }
     @Test
     void shouldPostNewTask() throws IOException {
-        String requestBody = "taskName=Deskcleaning&colorCode=black";
+        String requestBody = "taskName=Deskcleaning&colorCode=black&workerName=wali";
         HttpClient postClient = new HttpClient("localhost", server.getPort(), "/api/newTask", "POST", requestBody);
         assertEquals(302, postClient.getStatusCode());
 
         HttpClient getClient = new HttpClient("localhost", server.getPort(), "/api/tasks");
-        assertThat(getClient.getResponseBody()).contains("<li colorCode=black>Deskcleaning</br>   Current status: black</li><hr> <article>\n" +
+        assertThat(getClient.getResponseBody()).contains("<hr> <article>\n" +
                 "<h1>Deskcleaning</h1>\n" +
                 "<h4> Status: </h4>\n" +
                 "<p>black</p>\n" +
                 "<h4> Workers: </h4>\n" +
                 "<div></div>\n" +
                 "\n" +
-                "    </article> <hr>");
+                "    </article><hr>");
     }
 
     @Test

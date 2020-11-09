@@ -41,13 +41,14 @@ public class WorkerTaskGetController implements HttpController {
             for (int j = 0; j < workers.size(); j++) {
                 workerName = workerName + workers.get(j).getFirstName() + ", ";
             }
-            bod.append("<hr> <article>\n" + "<h1>" + tasks.get(i).getName() + "</h1>\n" +
+            bod.append("<hr> <article>\n" +
+                    "<h1>" + tasks.get(i).getName() + "</h1>\n" +
                     "<h4> Status: </h4>\n" +
                     "<p>" + status + "</p>\n" +
                     "<h4> Workers: </h4>\n" +
                     "<div>" + workerName + "</div>\n" +
                     "\n" +
-                    "    </article> ");
+                    "    </article>");
         }
         body += bod;
         body += "<hr>";

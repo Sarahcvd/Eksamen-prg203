@@ -28,8 +28,8 @@ public class UpdateWorkerController implements HttpController{
     public HttpMessage handle(HttpMessage request) throws SQLException {
         QueryString requestedParameter = new QueryString(request.getBody());
 
-        Long workerId = Long.valueOf(requestedParameter.getParameter("workerId"));
-        Long taskId = Long.valueOf(requestedParameter.getParameter("taskId"));
+        int workerId = Integer.parseInt(requestedParameter.getParameter("workerId"));
+        int taskId = Integer.parseInt(requestedParameter.getParameter("taskId"));
         Worker worker = workerDao.retrieve(workerId);
         Task task = taskDao.retrieve(taskId);
 

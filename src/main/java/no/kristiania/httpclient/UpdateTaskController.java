@@ -23,7 +23,7 @@ public class UpdateTaskController implements HttpController{
     public HttpMessage handle(HttpMessage request) throws SQLException {
         QueryString requestedParameter = new QueryString(request.getBody());
 
-        Long taskId = Long.valueOf(requestedParameter.getParameter("taskId"));
+        int taskId = Integer.parseInt(requestedParameter.getParameter("taskId"));
         String colorcode = String.valueOf(requestedParameter.getParameter("colorcode"));
 
         Task task = taskDao.retrieve(taskId);

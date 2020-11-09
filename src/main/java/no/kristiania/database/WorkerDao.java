@@ -40,7 +40,7 @@ public class WorkerDao extends AbstractDao<Worker> {
 
                 try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                     generatedKeys.next();
-                    worker.setId(generatedKeys.getLong("id"));
+                    worker.setId(generatedKeys.getInt("id"));
                 }
             }
         }
@@ -59,14 +59,14 @@ public class WorkerDao extends AbstractDao<Worker> {
         }
     }*/
 
-    public Worker retrieve(Long id) throws SQLException {
+    public Worker retrieve(int id) throws SQLException {
         return retrieve(id, "SELECT * FROM worker WHERE id = ?");
     }
 
     @Override
     protected Worker mapRow(ResultSet rs) throws SQLException {
         Worker worker = new Worker();
-        worker.setId(rs.getLong("id"));
+        worker.setId(rs.getInt("id"));
         worker.setFirstName(rs.getString("first_name"));
         worker.setLastName(rs.getString("last_name"));
         worker.setEmailAddress(rs.getString("email_address"));
