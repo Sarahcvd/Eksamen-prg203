@@ -3,7 +3,7 @@ package no.kristiania.database;
 public class Task {
     private String name;
     private int id;
-    private String ColorCode;
+    private String StatusColorCode;
 
     public String getName() { return name; }
 
@@ -13,7 +13,7 @@ public class Task {
 
     public int getId() { return id; }
 
-    public String getColorCode() { return ColorCode; }
+    public String getStatusColorCode() { return StatusColorCode; }
 
-    public void setColorCode(String colorCode) { ColorCode = colorCode; }
+    public void setStatusColorCode(String statusColorCode) { StatusColorCode = statusColorCode; }
 }

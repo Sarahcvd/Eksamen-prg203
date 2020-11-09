@@ -24,16 +24,16 @@ public class UpdateTaskController implements HttpController{
         QueryString requestedParameter = new QueryString(request.getBody());
 
         int taskId = Integer.parseInt(requestedParameter.getParameter("taskId"));
-        String colorcode = String.valueOf(requestedParameter.getParameter("colorcode"));
+        String statusColorCode = String.valueOf(requestedParameter.getParameter("statusColorCode"));
 
         Task task = taskDao.retrieve(taskId);
-        task.setColorCode(colorcode);
+        task.setStatusColorCode(statusColorCode);
 
         taskDao.update(task);
 
         HttpMessage redirect = new HttpMessage();
         redirect.setStartLine("HTTP/1.1 302 Redirect");
-        redirect.getHeaders().put("Location", "http://localhost:8080/editColorcode.html");
+        redirect.getHeaders().put("Location", "http://localhost:8080/editStatusColorCode.html");
         return redirect;
     }
 

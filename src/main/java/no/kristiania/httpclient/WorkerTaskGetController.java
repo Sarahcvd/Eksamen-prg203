@@ -31,7 +31,7 @@ public class WorkerTaskGetController implements HttpController {
                     "join worker w on wt.worker_id = w.id where wt.task_id = " + taskId;
             String workerName= "";
 
-            String status = tasks.get(i).getColorCode();
+            String status = tasks.get(i).getStatusColorCode();
             if(status == null){
                 status = "No status";
             }

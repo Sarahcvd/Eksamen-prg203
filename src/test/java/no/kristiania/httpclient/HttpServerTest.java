@@ -113,12 +113,12 @@ class HttpServerTest {
         TaskDao taskDao = new TaskDao(dataSource);
         Task jogging = new Task();
         jogging.setName("Jogging");
-        jogging.setColorCode("Yellow");
+        jogging.setStatusColorCode("Yellow");
         taskDao.insert(jogging);
 
         Task cleaning = new Task();
         cleaning.setName("Cleaning");
-        cleaning.setColorCode("Red");
+        cleaning.setStatusColorCode("Red");
         taskDao.insert(cleaning);
 
         WorkerDao workerDao = new WorkerDao(dataSource);

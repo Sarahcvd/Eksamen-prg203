@@ -22,11 +22,11 @@ public class WorkerTaskPostController implements HttpController {
 
 
         String decodedTaskName = URLDecoder.decode(requestedParameter.getParameter("taskName"), StandardCharsets.UTF_8);
-        String decodedTaskColor = URLDecoder.decode(requestedParameter.getParameter("colorCode"), StandardCharsets.UTF_8);
+        String decodedTaskStatusColor = URLDecoder.decode(requestedParameter.getParameter("statusColorCode"), StandardCharsets.UTF_8);
 
         Task task = new Task();
         task.setName(decodedTaskName);
-        task.setColorCode(decodedTaskColor);
+        task.setStatusColorCode(decodedTaskStatusColor);
         taskDao.insert(task);
 
         String body = "Hang on, redirecting....";

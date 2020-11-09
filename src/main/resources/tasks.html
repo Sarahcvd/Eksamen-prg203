@@ -20,7 +20,7 @@
                 <button>Filter</button>
             </p>
             <p>
-                Filter by status: <select id="colorcode" name="colorcode"></select>
+                Filter by status: <select id="statusColorCode" name="statusColorCode"></select>
                 <button>Filter</button>
             </p>
         </form>
@@ -36,7 +36,7 @@
             document.getElementById("id").innerHTML = html
         });
         fetch("/api/taskOptions").then(response => response.text()).then(html => {
-            document.getElementById("colorcode").innerHTML = html
+            document.getElementById("statusColorCode").innerHTML = html
         });
 
     </script>

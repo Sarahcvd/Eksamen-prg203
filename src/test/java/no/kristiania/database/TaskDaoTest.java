@@ -46,7 +46,7 @@ public class TaskDaoTest {
     }
     @Test
     void shouldPostNewTask() throws IOException {
-        String requestBody = "taskName=Deskcleaning&colorCode=black&workerName=wali";
+        String requestBody = "taskName=Deskcleaning&statusColorCode=black&workerName=wali";
         HttpClient postClient = new HttpClient("localhost", server.getPort(), "/api/newTask", "POST", requestBody);
         assertEquals(302, postClient.getStatusCode());
 
@@ -87,7 +87,7 @@ public class TaskDaoTest {
     public static Task exampleTask() {
         Task task = new Task();
         task.setName(exampleTaskName());
-        task.setColorCode("red");
+        task.setStatusColorCode("red");
         return task;
     }
 
