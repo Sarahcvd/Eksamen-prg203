@@ -37,7 +37,7 @@ public class HttpServer {
         WorkerTaskDao workerTaskDao = new WorkerTaskDao(dataSource);
         controllers = Map.of(
                 "/api/newTask", new WorkerTaskPostController(taskDao),
-                "/api/tasks", new WorkerTaskGetController(taskDao),
+                "/api/tasks", new WorkerTaskGetController(taskDao, workerDao, workerTaskDao),
                 "/api/taskOptions", new taskOptionsController(taskDao),
                 "/api/workerOptions", new WorkerOptionsController(workerDao),
                 "/api/updateWorker", new UpdateWorkerController(workerDao, taskDao, workerTaskDao)

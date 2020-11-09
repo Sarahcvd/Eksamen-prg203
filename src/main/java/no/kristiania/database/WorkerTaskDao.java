@@ -2,6 +2,8 @@ package no.kristiania.database;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WorkerTaskDao extends AbstractDao <WorkerTask>{
 
@@ -12,23 +14,25 @@ public class WorkerTaskDao extends AbstractDao <WorkerTask>{
     @Override
     protected WorkerTask mapRow(ResultSet rs) throws SQLException {
         WorkerTask workerTask = new WorkerTask();
-        workerTask.setTaskId((Long) rs.getObject("task_id"));
-        workerTask.setWorkerId((Long) rs.getObject("worker_id"));
+        workerTask.setTaskId(rs.getLong("task_id"));
+        workerTask.setWorkerId(rs.getLong("worker_id"));
 
         return workerTask;
     }
 
-    /* public void update(Task task) throws SQLException {
+    public List<WorkerTask> list() throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE worker_task SET worker_id = ? WHERE task_id = ?" //Denne er åpenbart feil
-
-            )) {
-                statement.setLong(1, task.getId());
-                statement.executeUpdate();
+            try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM worker_task")) {
+                try (ResultSet rs = statement.executeQuery()) {
+                    List<WorkerTask> workerTasks = new ArrayList<>();
+                    while (rs.next()) {
+                        workerTasks.add(mapRow(rs));
+                    }
+                    return workerTasks;
+                }
             }
         }
-    } */
+    }
 
     public void insert(Task task, Worker worker) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
