@@ -62,27 +62,6 @@ public class WorkerDaoTest {
                 .contains("<option value=" + worker.getId() + ">" + worker.getFirstName() + "</option>");
     }
 
-    /*@Test
-    void shouldUpdateExistingWorkerWithNewTask() throws IOException, SQLException {
-        UpdateWorkerController controller = new UpdateWorkerController(workerDao);
-
-        Worker worker = exampleWorker();
-        workerDao.insert(worker);
-
-        Task task = TaskDaoTest.exampleTask();
-        new TaskDao(workerDao.dataSource).insert(task);
-
-        String body = "workerId=" + worker.getId() + "&taskId=" + task.getId();
-
-        HttpMessage response = controller.handle(new HttpMessage(body));
-        assertThat(workerDao.retrieve(worker.getId()).getTaskId())
-                .isEqualTo(task.getId());
-        assertThat(response.getStartLine())
-                .isEqualTo("HTTP/1.1 302 Redirect");
-        assertThat(response.getHeaders().get("Location"))
-                .isEqualTo("http://localhost:8080/editWorker.html");
-    }*/
-
     public static Worker exampleWorker() {
         Worker worker = new Worker();
         worker.setFirstName(exampleFirstName());
@@ -93,17 +72,17 @@ public class WorkerDaoTest {
 
     /** Returns a random first name */
     private static String exampleFirstName() {
-        String[] options = {"Johannes", "Christian", "Lucas", "Matheus", "Markus"};
+        String[] options = {"Johnny", "Bravo", "Luke", "Eiffel", "Toward"};
         return options[random.nextInt(options.length)];
     }
     /** Returns a random last name */
     private static String exampleLastName() {
-        String[] options = {"Johnsson", "Elfborg", "Colason", "Dobbelthode", "Trebein"};
+        String[] options = {"Arnoldsson", "Benet", "Whiskyardszen", "Henrhenrrikssnlollson", "Armgutten"};
         return options[random.nextInt(options.length)];
     }
     /** Returns a random email-address */
     private static String exampleEmailAddress() {
-        String[] options = {"loller@lol.no", "jumper@jump.dk", "supreme@beta.uk", "simp@finlandia.se", "cheaptents@larsmonse.no"};
+        String[] options = {"menhej@egms.no", "all@ts.no", "fell@fell.no", "exploring@lol.no", "slotmachines@egms.nu"};
         return options[random.nextInt(options.length)];
     }
 }

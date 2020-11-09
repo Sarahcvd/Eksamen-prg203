@@ -46,13 +46,13 @@ public class TaskDaoTest {
     }
     @Test
     void shouldPostNewTask() throws IOException {
-        String requestBody = "taskName=Deskcleaning&statusColorCode=black&workerName=wali";
+        String requestBody = "taskName=Walking&statusColorCode=black";
         HttpClient postClient = new HttpClient("localhost", server.getPort(), "/api/newTask", "POST", requestBody);
         assertEquals(302, postClient.getStatusCode());
 
         HttpClient getClient = new HttpClient("localhost", server.getPort(), "/api/tasks");
         assertThat(getClient.getResponseBody()).contains("<hr> <article>\n" +
-                "<h1> Task: Deskcleaning</h1>\n" +
+                "<h1> Task: Walking</h1>\n" +
                 "<p><strong> Status:</strong> black</p>\n" +
                 "<p><strong> Workers:</strong> </p>\n" +
                 "\n" +
@@ -90,7 +90,7 @@ public class TaskDaoTest {
     }
 
     private static String exampleTaskName() {
-        String[] options = {"Desk cleaning", "Code-review", "Database structure", "Office-backflip", "Wine lottery"};
+        String[] options = {"Walking", "Coding", "Reading", "Handstands", "Excessive-drinking"};
         return options[random.nextInt(options.length)];
     }
 }

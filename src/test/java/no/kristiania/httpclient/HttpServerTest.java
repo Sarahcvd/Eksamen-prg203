@@ -87,39 +87,39 @@ class HttpServerTest {
 
     @Test
     void shouldPostNewWorker() throws IOException, SQLException {
-        String requestBody = "first_name=wali&email_address=wgbjork@gmail.com";
+        String requestBody = "first_name=hej&email_address=hej@hej.no";
         HttpClient client = new HttpClient("localhost", server.getPort(), "/api/newWorker", "POST", requestBody);
         assertEquals(302, client.getStatusCode());
         assertThat(server.getWorkers())
-                .filteredOn(worker -> worker.getFirstName().equals("wali"))
+                .filteredOn(worker -> worker.getFirstName().equals("hej"))
                 .isNotEmpty()
-                .satisfies(w -> assertThat(w.get(0).getEmailAddress()).isEqualTo("wgbjork@gmail.com"));
+                .satisfies(w -> assertThat(w.get(0).getEmailAddress()).isEqualTo("hej@hej.no"));
     }
 
     @Test
     void shouldReturnExistingMembers() throws IOException, SQLException {
         WorkerDao workerDao = new WorkerDao(dataSource);
         Worker worker = new Worker();
-        worker.setFirstName("wali");
-        worker.setLastName("gustav");
-        worker.setEmailAddress("wgbjork@gmail.com");
+        worker.setFirstName("gurra");
+        worker.setLastName("gurrson");
+        worker.setEmailAddress("gurr@gurr.no");
         workerDao.insert(worker);
         HttpClient client = new HttpClient("localhost", server.getPort(), "/api/worker");
-        assertThat(client.getResponseBody()).contains("<li>wali gustav wgbjork@gmail.com</li>");
+        assertThat(client.getResponseBody()).contains("<li>gurra gurrson gurr@gurr.no</li>");
     }
 
     @Test
     void shouldFilterTasksByWorker() throws SQLException {
         TaskDao taskDao = new TaskDao(dataSource);
-        Task jogging = new Task();
-        jogging.setName("Jogging");
-        jogging.setStatusColorCode("Yellow");
-        taskDao.insert(jogging);
+        Task greet = new Task();
+        greet.setName("Greeting");
+        greet.setStatusColorCode("Yellow");
+        taskDao.insert(greet);
 
-        Task cleaning = new Task();
-        cleaning.setName("Cleaning");
-        cleaning.setStatusColorCode("Red");
-        taskDao.insert(cleaning);
+        Task whispering = new Task();
+        whispering.setName("Cleaning");
+        whispering.setStatusColorCode("Red");
+        taskDao.insert(whispering);
 
         WorkerDao workerDao = new WorkerDao(dataSource);
         Worker wali = new Worker();
@@ -127,9 +127,5 @@ class HttpServerTest {
         wali.setLastName("gustav");
         wali.setEmailAddress("wgbjork@gmail.com");
         workerDao.insert(wali);
-
-        WorkerTaskDao workerTaskDao = new WorkerTaskDao(dataSource);
-        cleaning.setId(wali.getId());
-        //workerTaskDao.update(cleaning);
     }
 }
