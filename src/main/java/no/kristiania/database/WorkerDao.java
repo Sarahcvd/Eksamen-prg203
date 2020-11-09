@@ -25,6 +25,7 @@ public class WorkerDao extends AbstractDao<Worker> {
         }
     }
 
+
     public void insert(Worker worker) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
