@@ -90,7 +90,7 @@ public class HttpServer {
             if (requestPath.equals("/echo")) {
                 handleEchoRequest(clientSocket, requestTarget, questionPos);
             } else if (requestPath.equals("/api/worker")){
-                handleGetWorkers(clientSocket, requestTarget, questionPos);
+                handleGetWorkers(clientSocket);
             } else {
                 HttpController controller = controllers.get(requestPath);
                 if(controller != null){
@@ -160,7 +160,7 @@ public class HttpServer {
         }
     }
 
-    public static void handleGetWorkers(Socket clientSocket, String requestTarget, int questionPos) throws IOException, SQLException {
+    public static void handleGetWorkers(Socket clientSocket) throws IOException, SQLException {
         String body = "<ul>";
         for (Worker worker : workerDao.list()) {
             body += "<li>" + worker.getFirstName() + " " + worker.getLastName() + " " + worker.getEmailAddress() + "</li>";

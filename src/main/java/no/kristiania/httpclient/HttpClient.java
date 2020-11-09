@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class HttpClient {
     private int statusCode;
-    private Map<String, String> responseHeaders = new HashMap<>();
+    private Map<String, String> responseHeaders;
     private String responseBody;
 
     public HttpClient(final String hostname, int port, final String requestTarget) throws IOException {
@@ -31,7 +31,6 @@ public class HttpClient {
         if (requestBody != null){
             socket.getOutputStream().write(requestBody.getBytes());
         }
-
 
         HttpMessage response = new HttpMessage(socket);
         String responseLine = response.getStartLine();
