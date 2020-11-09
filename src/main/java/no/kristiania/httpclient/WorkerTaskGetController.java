@@ -31,19 +31,26 @@ public class WorkerTaskGetController implements HttpController {
                     "join worker w on wt.worker_id = w.id where wt.task_id = " + taskId;
             String workerName= "";
 
+            String status = tasks.get(i).getColorCode();
+            if(status == null){
+                status = "No status";
+            }
+
             List<Worker> workers = workerDao.list(sql);
             System.out.println("size: " + workers.size());
             for (int j = 0; j < workers.size(); j++) {
                 workerName = workerName + workers.get(j).getFirstName() + ", ";
-
             }
             bod.append("<hr> <article>\n" + "<h1>" + tasks.get(i).getName() + "</h1>\n" +
+                    "<h4> Status: </h4>\n" +
+                    "<p>" + status + "</p>\n" +
                     "<h4> Workers: </h4>\n" +
                     "<div>" + workerName + "</div>\n" +
                     "\n" +
-                    "</article> ");
+                    "    </article> ");
         }
         body += bod;
+        body += "<hr>";
 
         String response = "HTTP/1.1 200 OK\r\n" +
                 "Content-Length: " + body.length() + "\r\n" +
