@@ -1,11 +1,11 @@
-package no.kristiania.database;
+package no.kristiania.DAO;
 
 public class Worker {
     private String firstName;
     private String lastName;
     private String emailAddress;
-    private Integer id;
-    private Integer taskId;
+    private int id;
+    private int taskId;
 
     public String getFirstName() {
         return firstName;
@@ -15,11 +15,11 @@ public class Worker {
         this.firstName = firstName;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -39,11 +39,11 @@ public class Worker {
         this.emailAddress = emailAddress;
     }
 
-    public Integer getTaskId() {
+    public int getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(Integer taskId) {
+    public void setTaskId(int taskId) {
         this.taskId = taskId;
     }
 }

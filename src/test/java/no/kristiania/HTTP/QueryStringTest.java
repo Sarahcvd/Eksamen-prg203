@@ -1,4 +1,4 @@
-package no.kristiania.httpclient;
+package no.kristiania.HTTP;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +28,7 @@ public class QueryStringTest {
     @Test
     void shouldRetrieveParameterByName(){
         QueryString queryString = new QueryString("text=Hello");
-        assertEquals(null, queryString.getParameter("status"));
+        assertNull(queryString.getParameter("status"));
         assertEquals("Hello", queryString.getParameter("text"));
     }
 

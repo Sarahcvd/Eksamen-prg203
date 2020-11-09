@@ -1,5 +1,7 @@
-package no.kristiania.httpclient;
+package no.kristiania.HTTP;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -10,7 +12,7 @@ public class QueryString {
         for(String parameter : queryString.split("&")){
             int equalsPos = parameter.indexOf('=');
             String key = parameter.substring(0, equalsPos);
-            String value = parameter.substring(equalsPos + 1);
+            String value = URLDecoder.decode(parameter.substring(equalsPos+1), StandardCharsets.UTF_8);
             this.parameters.put(key, value);
         }
     }

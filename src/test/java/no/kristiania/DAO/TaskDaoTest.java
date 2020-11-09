@@ -1,8 +1,8 @@
-package no.kristiania.database;
+package no.kristiania.DAO;
 
-import no.kristiania.httpclient.HttpClient;
-import no.kristiania.httpclient.HttpServer;
-import no.kristiania.httpclient.taskOptionsController;
+import no.kristiania.HTTP.HttpClient;
+import no.kristiania.HTTP.HttpServer;
+import no.kristiania.HTTP.taskOptionsController;
 import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,12 +46,17 @@ public class TaskDaoTest {
     }
     @Test
     void shouldPostNewTask() throws IOException {
-        String requestBody = "taskName=Deskcleaning&colorCode=black";
+        String requestBody = "taskName=Walking&statusColorCode=black";
         HttpClient postClient = new HttpClient("localhost", server.getPort(), "/api/newTask", "POST", requestBody);
         assertEquals(302, postClient.getStatusCode());
 
         HttpClient getClient = new HttpClient("localhost", server.getPort(), "/api/tasks");
-        assertThat(getClient.getResponseBody()).contains("<ul><li colorCode=black>Deskcleaning</br>   Current status:   black</li></ul>");
+        assertThat(getClient.getResponseBody()).contains("<hr> <article>\n" +
+                "<h1> Task: Walking</h1>\n" +
+                "<p><strong> Status:</strong> black</p>\n" +
+                "<p><strong> Workers:</strong> </p>\n" +
+                "\n" +
+                "    </article><hr>");
     }
 
     @Test
@@ -74,18 +79,18 @@ public class TaskDaoTest {
         taskDao.insert(task);
 
         assertThat(controller.getBody())
-                .contains("<option value=" + task.getId() +">" + task.getName() + task.getColorCode() +"</option>");
+                .contains("<option value=" + task.getId() +">" + task.getName() + "</option>");
     }
 
     public static Task exampleTask() {
         Task task = new Task();
         task.setName(exampleTaskName());
-        task.setColorCode("red");
+        task.setStatusColorCode("red");
         return task;
     }
 
     private static String exampleTaskName() {
-        String[] options = {"Desk cleaning", "Code-review", "Database structure", "Office-backflip", "Wine lottery"};
+        String[] options = {"Walking", "Coding", "Reading", "Handstands", "Excessive-drinking"};
         return options[random.nextInt(options.length)];
     }
 }

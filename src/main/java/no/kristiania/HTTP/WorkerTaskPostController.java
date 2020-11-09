@@ -1,7 +1,7 @@
-package no.kristiania.httpclient;
+package no.kristiania.HTTP;
 
-import no.kristiania.database.Task;
-import no.kristiania.database.TaskDao;
+import no.kristiania.DAO.Task;
+import no.kristiania.DAO.TaskDao;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -22,14 +22,14 @@ public class WorkerTaskPostController implements HttpController {
 
 
         String decodedTaskName = URLDecoder.decode(requestedParameter.getParameter("taskName"), StandardCharsets.UTF_8);
-        String decodedTaskColor = URLDecoder.decode(requestedParameter.getParameter("colorCode"), StandardCharsets.UTF_8);
+        String decodedTaskStatusColor = URLDecoder.decode(requestedParameter.getParameter("statusColorCode"), StandardCharsets.UTF_8);
 
         Task task = new Task();
         task.setName(decodedTaskName);
-        task.setColorCode(decodedTaskColor);
+        task.setStatusColorCode(decodedTaskStatusColor);
         taskDao.insert(task);
 
-        String body = "Hang on, redirecting....";
+        String body = "Wait a second, redirecting....";
         String response = "HTTP/1.1 302 REDIRECT\r\n" +
                 "Location: http://localhost:8080/newTask.html\r\n" +
                 "Content-Length: " + body.length() + "\r\n" +

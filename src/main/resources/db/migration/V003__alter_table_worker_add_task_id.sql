@@ -1,1 +1,0 @@
-alter table worker add column task_id integer null references task(id);

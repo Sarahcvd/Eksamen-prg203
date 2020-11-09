@@ -1,7 +1,7 @@
-package no.kristiania.httpclient;
+package no.kristiania.HTTP;
 
-import no.kristiania.database.Task;
-import no.kristiania.database.TaskDao;
+import no.kristiania.DAO.Task;
+import no.kristiania.DAO.TaskDao;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -19,14 +19,13 @@ public class taskOptionsController implements HttpController{
         HttpMessage response = new HttpMessage(getBody());
         response.write(clientSocket);
 
-        HttpMessage redirect = new HttpMessage();
-        return redirect;
+        return new HttpMessage();
     }
 
     public String getBody() throws SQLException {
         String body = "";
         for(Task task : taskDao.list()){
-            body += "<option value=" + task.getId() +">" + task.getName() + task.getColorCode() +"</option>";
+            body += "<option value=" + task.getId() +">" + task.getName() + "</option>";
         }
 
         return body;

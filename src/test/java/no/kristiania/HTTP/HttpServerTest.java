@@ -1,7 +1,6 @@
-package no.kristiania.httpclient;
+package no.kristiania.HTTP;
 
-import no.kristiania.database.Worker;
-import no.kristiania.database.WorkerDao;
+import no.kristiania.DAO.*;
 import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.BeforeEach;
@@ -88,25 +87,24 @@ class HttpServerTest {
 
     @Test
     void shouldPostNewWorker() throws IOException, SQLException {
-        String requestBody = "first_name=wali&email_address=wgbjork@gmail.com";
+        String requestBody = "first_name=hej&email_address=hej@hej.no";
         HttpClient client = new HttpClient("localhost", server.getPort(), "/api/newWorker", "POST", requestBody);
         assertEquals(302, client.getStatusCode());
         assertThat(server.getWorkers())
-                .filteredOn(worker -> worker.getFirstName().equals("wali"))
+                .filteredOn(worker -> worker.getFirstName().equals("hej"))
                 .isNotEmpty()
-                .satisfies(w -> assertThat(w.get(0).getEmailAddress()).isEqualTo("wgbjork@gmail.com"));
+                .satisfies(w -> assertThat(w.get(0).getEmailAddress()).isEqualTo("hej@hej.no"));
     }
 
     @Test
     void shouldReturnExistingMembers() throws IOException, SQLException {
         WorkerDao workerDao = new WorkerDao(dataSource);
         Worker worker = new Worker();
-        worker.setFirstName("wali");
-        worker.setLastName("gustav");
-        worker.setEmailAddress("wgbjork@gmail.com");
+        worker.setFirstName("gurra");
+        worker.setLastName("gurrson");
+        worker.setEmailAddress("gurr@gurr.no");
         workerDao.insert(worker);
         HttpClient client = new HttpClient("localhost", server.getPort(), "/api/worker");
-        assertThat(client.getResponseBody()).contains("<li>wali gustav wgbjork@gmail.com</li>");
+        assertThat(client.getResponseBody()).contains("<li>gurra gurrson gurr@gurr.no</li>");
     }
-
 }

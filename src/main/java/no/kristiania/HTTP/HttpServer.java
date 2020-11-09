@@ -1,8 +1,9 @@
-package no.kristiania.httpclient;
+package no.kristiania.HTTP;
 
-import no.kristiania.database.Worker;
-import no.kristiania.database.WorkerDao;
-import no.kristiania.database.TaskDao;
+import no.kristiania.DAO.Worker;
+import no.kristiania.DAO.WorkerDao;
+import no.kristiania.DAO.TaskDao;
+import no.kristiania.DAO.WorkerTaskDao;
 import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.slf4j.Logger;
@@ -33,12 +34,14 @@ public class HttpServer {
     public HttpServer(int port, DataSource dataSource) throws IOException {
         workerDao = new WorkerDao(dataSource);
         taskDao = new TaskDao(dataSource);
+        WorkerTaskDao workerTaskDao = new WorkerTaskDao(dataSource);
         controllers = Map.of(
                 "/api/newTask", new WorkerTaskPostController(taskDao),
-                "/api/tasks", new WorkerTaskGetController(taskDao),
+                "/api/tasks", new WorkerTaskGetController(taskDao, workerDao),
                 "/api/taskOptions", new taskOptionsController(taskDao),
                 "/api/workerOptions", new WorkerOptionsController(workerDao),
-                "/api/updateWorker", new UpdateWorkerController(workerDao)
+                "/api/updateWorker", new UpdateWorkerController(workerDao, taskDao, workerTaskDao),
+                "/api/updateStatus", new UpdateTaskController(taskDao)
         );
         // Open an entry point to our program for network clients
         serverSocket = new ServerSocket(port);
@@ -105,15 +108,15 @@ public class HttpServer {
 
     public static void handlePostWorker(Socket clientSocket, HttpMessage request) throws SQLException, IOException {
         QueryString requestedParameter = new QueryString(request.getBody());
-        String decodedOutput = URLDecoder.decode(requestedParameter.getParameter("email_address"), StandardCharsets.UTF_8);
+        String decodedEmailAddress = URLDecoder.decode(requestedParameter.getParameter("email_address"), StandardCharsets.UTF_8);
 
         Worker worker = new Worker();
         worker.setFirstName(requestedParameter.getParameter("first_name"));
         worker.setLastName(requestedParameter.getParameter("last_name"));
-        worker.setEmailAddress(decodedOutput);
+        worker.setEmailAddress(decodedEmailAddress);
 
         workerDao.insert(worker);
-        String body = "Hang on, redirecting....";
+        String body = "Wait a second, redirecting....";
         String response = "HTTP/1.1 302 REDIRECT\r\n" +
                 "Location: http://localhost:8080/newWorker.html\r\n" +
                 "Content-Length: " + body.length() + "\r\n" +

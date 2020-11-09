@@ -1,4 +1,4 @@
-package no.kristiania.database;
+package no.kristiania.DAO;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -14,11 +14,11 @@ public class TaskDao extends AbstractDao<Task>{
     public void insert(Task task) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO task (name, colorcode) VALUES (?, ?)",
+                    "INSERT INTO task (name, statusColorCode) VALUES (?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             )) {
                 statement.setString(1, task.getName());
-                statement.setString(2, task.getColorCode());
+                statement.setString(2, task.getStatusColorCode());
                 statement.executeUpdate();
 
                 try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
@@ -29,7 +29,7 @@ public class TaskDao extends AbstractDao<Task>{
         }
     }
 
-    public Task retrieve(Integer id) throws SQLException {
+    public Task retrieve(int id) throws SQLException {
         return retrieve(id, "SELECT * FROM task WHERE id = ?");
     }
 
@@ -52,7 +52,19 @@ public class TaskDao extends AbstractDao<Task>{
         Task task = new Task();
         task.setId(rs.getInt("id"));
         task.setName(rs.getString("name"));
-        task.setColorCode(rs.getString("colorcode"));
+        task.setStatusColorCode(rs.getString("statusColorCode"));
         return task;
+    }
+
+    public void update(Task task) throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE task SET statusColorCode = ? WHERE id = ?"
+            )) {
+                statement.setString(1, task.getStatusColorCode());
+                statement.setInt(2,task.getId());
+                statement.executeUpdate();
+            }
+        }
     }
 }
