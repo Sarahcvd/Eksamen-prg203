@@ -26,7 +26,7 @@ public class taskOptionsController implements HttpController{
     public String getBody() throws SQLException {
         String body = "";
         for(Task task : taskDao.list()){
-            body += "<option value=" + task.getId() +">" + task.getName() + task.getColorCode() +"</option>";
+            body += "<option value=" + task.getId() +">" + task.getName() + "</option>";
         }
 
         return body;

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit status color</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <form method="post" action="/api/updateStatus">
+        <p>Select task: <select name="taskId" id="taskId"></select></p>
+        <div>Select color-status:
+            <select name="colorcode" id="colorcode">
+                <option value="Green">Green</option>
+                <option value="Yellow">Yellow</option>
+                <option value="Red">Red</option>
+            </select>
+        </div>
+        <button>Submit</button>
+    </form>
+
+</body>
+<script>
+
+    fetch("/api/taskOptions").then(response => response.text()).then(html => {
+        document.getElementById("taskId").innerHTML = html
+    });
+
+</script>
+</html>

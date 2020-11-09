@@ -29,8 +29,6 @@ public class TaskDao extends AbstractDao<Task>{
         }
     }
 
-
-
     public Task retrieve(Long id) throws SQLException {
         return retrieve(id, "SELECT * FROM task WHERE id = ?");
     }
@@ -56,5 +54,17 @@ public class TaskDao extends AbstractDao<Task>{
         task.setName(rs.getString("name"));
         task.setColorCode(rs.getString("colorcode"));
         return task;
+    }
+
+    public void update(Task task) throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE task SET colorcode = ? WHERE id = ?"
+            )) {
+                statement.setString(1, task.getColorCode());
+                statement.setLong(2,task.getId());
+                statement.executeUpdate();
+            }
+        }
     }
 }
