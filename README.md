@@ -36,8 +36,8 @@ Link til github repo: https://github.com/kristiania/pgr203eksamen-Sarahcvd
 ### Server structure
 ![Server Structure](docs/server_structure.png)
 
-### Datamodell 
-Lim inn UML 
+### Database UML
+![databaseUml](docs/databaseUml.png)
 
 ### HttpServer Diagram 
 Lim inn UML 
